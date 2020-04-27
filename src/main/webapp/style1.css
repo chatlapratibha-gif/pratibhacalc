@@ -1,0 +1,119 @@
+@charset "ISO-8859-1";
+@charset "ISO-8859-1";
+h1{
+	color:white;
+	size:30px;
+	text-align: center;
+}
+ul{
+	text-align:center;	
+}
+ul.a{
+	text-align:right;
+	margin-right: 20px;	
+}
+li.l{
+	display:inline-table;
+	padding:10px;
+ 	font-size:20px;	
+}
+li{
+	display:inline-table;
+	padding:10px;
+ 	font-size:20px;	
+	text-shadow: 0 0 3px #408080;
+}
+li a.a1:hover{
+	color:yellow;
+	font-size:20px;
+}
+
+body{
+	color:white;
+	font-family:serif;
+	background-color:#b90f53;
+	text-align:center;
+	align:center;
+	background-image:url("chargeback-prevention-instabill.jpg");	
+	background-size: cover;
+	background-attachment:fixed;
+}
+.header{
+	color:white;
+	width:100%;
+	height:100px;
+	padding: 20px;	
+}
+.formdata
+{
+	width:400px;
+	height:auto;
+	text-align:center;
+	border:2px solid white;
+	border-radius:15px;
+	margin-top:10px;
+	display:inline-block;
+}
+.formdata1
+{
+	width:auto;
+	height:auto;
+	text-align:center;
+	border:2px solid white;
+	border-radius:6px;
+	margin-top:10px;
+	display:inline-block;
+}
+.formcontrol
+{
+	 padding: 10px;
+	 height: 5px;
+	 margin-top: 10px;
+}
+a{
+	text-decoration: none;
+	font-size: 18px;
+	color:Yellow;
+}
+a.a1{
+	text-decoration: none;
+	font-size: 18px;
+	color:white;
+}
+.formsubmitbutton
+{
+	width: 100px;
+	height: 25px;
+	border-radius: 20px;
+	margin-top: 10px;		
+}
+.errors
+{
+	color:yellow;
+	font-size: 22px;
+}
+.select-box{
+   width:160px;
+   height:24px;
+   overflow: hidden;
+   background: url("arrow.png") no-repeat right #fff;
+   border: 1px solid #ccc;
+   margin:auto;
+}
+.select-field{
+	border:none;
+   text-shadow: 0 0 3px #0080c0;
+   font-size:16px;
+   color:#b90f53;
+}
+table.t1{
+	background-color:#c0c0c0; 
+	text-align:center;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	align:center;
+}
+button{
+	background-color:#0080c0;
+	color:white; 
+}
