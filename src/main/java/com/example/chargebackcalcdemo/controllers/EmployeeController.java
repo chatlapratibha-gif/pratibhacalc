@@ -4,6 +4,8 @@ import java.util.List;
 
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +24,7 @@ import com.example.chargebackcalcdemo.models.CusLogin;
 import com.example.chargebackcalcdemo.models.Customer;
 import com.example.chargebackcalcdemo.models.EmpLogin;
 import com.example.chargebackcalcdemo.models.Employee;
+import com.example.chargebackcalcdemo.models.LodgeComplaint;
 import com.example.chargebackcalcdemo.models.Transactions;
 import com.example.chargebackcalcdemo.services.EmpServices;
 
@@ -94,7 +97,12 @@ public class EmployeeController {
 			    }
 				else if(status==2)
 				{
+					
+					
 					session.setAttribute("name",emplogin.getEmpId());
+					
+					model.addAttribute("CustIDs",empservices.getCustIds());
+					model.addAttribute("customerIds",empservices.getCustomerIds());
 					return "EmpHome";
 				}
 				else
@@ -105,20 +113,32 @@ public class EmployeeController {
 				
 				}
 
-	}
+	} 
+	
 	/*
-	 * @PostMapping("/searchcustomers") public String
-	 * searchUser(@RequestParam("searchbycustomerId") String customerId,HttpSession
-	 * session,Model model) { List<Customer> customers=
-	 * empservices.serchBycustomerId(customerId); //System.out.println(users);
-	 * model.addAttribute("customerList", customers); return "EmpHome"; }
+	 * @ModelAttribute("customerIdSet") public Set<Long> getCustomerIds() { Set<Long
+	 * > customerSet = empservices.getCustIds();
+	 * 
+	 * return customerSet;
+	 * 
+	 * }
 	 */
 	
+	
+	  @PostMapping("/searchcustomers") 
+	/* @ModelAttribute("searchCustomer") */
+	  public String searchUser(@RequestParam("searchbycustomerId") long customerId,HttpSession
+	  session,Model model) 
+	  { 
+       Customer customers= empservices.serchBycustomerId(customerId); //System.out.println(users)
+	  model.addAttribute("searchCustomer", customers); 
+	  return "EmpHome"; 
+	  }
 	@GetMapping("/Transactions")
 	public String getAllTransactions(Model model,HttpSession session)
 	{
-		List<Customer> cusList=empservices.cusList();
-		model.addAttribute("cusList", cusList);
+		List<Transactions> cusList=empservices.transactionList();
+		model.addAttribute("translist", cusList);
 		return "EmpHome";
 	}
 	@GetMapping(value="/emplogout")
@@ -126,6 +146,51 @@ public class EmployeeController {
 		session.invalidate();
 		return "redirect:/";
 	}
-
+	@GetMapping(value="/getCustDetails")
+	public String getCustDetails(@RequestParam("cust") long customerid ,Model model)
+	{
+		Customer customer=empservices.serchBycustomerId(customerid);
+		model.addAttribute("customer",customer);
+		return "EmpHome";
+		
 	}
+	@GetMapping(value="/getChargeCustDetails")
+	public String getCustappliedchargeback(@RequestParam("cust1") long customerid1 ,Model model)
+	{
+		LodgeComplaint lcomlint=empservices.searchwithCustomerId(customerid1);
+		model.addAttribute("customercharge",lcomlint);
+		return "EmpHome";
+		
+	}
+}
+	/*
+	 String username  =(String) session.getAttribute("username");
+		User user = userBo.getUserByUserName(username);
+		List<AddressBook> addressbook = addressbookdao.getAddressByUser(user);
+		
+		
+		boolean status =addressbook.stream()
+				.anyMatch(t-> t.getUser().getUsername().equals(username)&&t.getContactUsername().equals(friendusername));
+		
+		if(status)
+		{
+			model.addAttribute("message", "You have already sent request to Friend");
+			  return "userhome";
+		}
+		else
+		{
+			 AddressBook ab = new AddressBook(); 
+			 ab.setContactUsername(friendusername);
+			 ab.setDateCreated(new Date()); ab.setStatus("pending"); 
+			 ab.setUser(user);
+			addressbookdao.save(ab);
+			  
+			  model.addAttribute("message", "Request has sent request to Friend"); 
+			  return "userhome"; 
+		}
+	 */
+
+	
+
+	
 

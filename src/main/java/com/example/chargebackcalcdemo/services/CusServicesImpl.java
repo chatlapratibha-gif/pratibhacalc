@@ -8,13 +8,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.chargebackcalcdemo.dao.CusDao;
+import com.example.chargebackcalcdemo.dao.Lodgecomplaintdao;
+import com.example.chargebackcalcdemo.dao.TransacDao;
 import com.example.chargebackcalcdemo.models.CusLogin;
 import com.example.chargebackcalcdemo.models.Customer;
+import com.example.chargebackcalcdemo.models.Employee;
+import com.example.chargebackcalcdemo.models.LodgeComplaint;
+import com.example.chargebackcalcdemo.models.Transactions;
 @Service
 @Component
 public class CusServicesImpl implements CusServices {
     @Autowired
     private CusDao dao;
+    @Autowired
+    private Lodgecomplaintdao ldao;
+    @Autowired
+    private TransacDao transdao;
     	@Override
 	public int createCus(Customer customer) {
 		Customer c=dao.findBycusId(customer.getCusId());
@@ -53,6 +62,63 @@ public class CusServicesImpl implements CusServices {
 	public List<Customer> cusList() {
 		return dao.findAll();
 
+	}
+	@Override
+	public List<Transactions> transactionlist() {
+		
+		
+	List<Transactions> tl=(List<Transactions>)transdao.findAll();
+	return tl;   
+	
+	}
+
+	/*
+	 * @Override
+	 * 
+	 * public Customer findByCutomerId(Customer customer) {
+	 * 
+	 * 
+	 * Customer c = dao.findByCutomerId(customer.getTransactionslist());
+	 * 
+	 * return c;
+	 * 
+	 * 
+	 * }
+	 */
+	
+	
+	@Override
+	public List<Customer> searchById(long cutomerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Customer findByCutomerId(long cutomerId) {
+		// TODO Auto-generated method stub
+		return dao.findByCustomerId(cutomerId);
+	}
+	@Override
+	public Customer getCustomer(String userId) {
+		// TODO Auto-generated method stub
+		return dao.findBycusId(userId);
+	}
+	@Override
+	public int createlodge(LodgeComplaint c) {
+		
+		LodgeComplaint lc=ldao.findBycustomerid(c.getCustomerid());
+		if(lc==null)
+		{
+			LodgeComplaint l1=ldao.save(c);
+			if(l1!=null) {
+				return 1;
+			}
+			else {
+				return 2;
+			}
+			
+		}
+		
+		return 0;
 	}
 }
 		 

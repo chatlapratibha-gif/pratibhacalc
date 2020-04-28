@@ -9,5 +9,6 @@ import com.example.chargebackcalcdemo.models.Transactions;
 public interface TransacDao extends CrudRepository<Transactions, Integer> 
 {
 	public List<Transactions> findAll();
+	public Transactions findById(int id);
 
 }
